@@ -15,7 +15,7 @@ export default class Vacation extends Model {
     location: string
 
     @AllowNull(false)
-    @Column(DataType.STRING)
+    @Column(DataType.TEXT)
     description: string
 
     @AllowNull(false)
