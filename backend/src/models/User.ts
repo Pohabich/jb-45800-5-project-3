@@ -12,11 +12,11 @@ export default class User extends Model {
 
     @AllowNull(false)
     @Column(DataType.STRING)
-    name: string
+    firstName: string
 
     @AllowNull(false)
     @Column(DataType.STRING)
-    family: string
+    lastName: string
 
     @AllowNull(false)
     @Unique

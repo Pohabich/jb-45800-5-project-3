@@ -1,6 +1,7 @@
 import {
     BelongsTo,
     Column,
+    DataType,
     ForeignKey,
     Model,
     PrimaryKey,
@@ -18,12 +19,12 @@ export default class Like extends Model {
 
     @PrimaryKey
     @ForeignKey(() => User)
-    @Column
+    @Column(DataType.UUID)
     userId: string;
 
     @PrimaryKey
     @ForeignKey(() => Vacation)
-    @Column
+    @Column(DataType.UUID)
     vacationId: string;
 
     @BelongsTo(() => User)

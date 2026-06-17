@@ -10,4 +10,5 @@ const sequelize = new Sequelize({
     models: [User, Vacation, Like],
     logging: console.log,
     ...config.get('db')
-})  
+}) 
+export default sequelize

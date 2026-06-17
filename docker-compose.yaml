@@ -1,0 +1,38 @@
+# replace all container names accroding to actual project
+services:
+  database:
+    container_name: project3-db-compose 
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+      - MYSQL_DATABASE=college
+      - MYSQL_TCP_PORT=3306
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+    build: ./database
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+      
+  backend:
+    container_name: project3-backend-compose
+    ports:
+      - 3010:3000
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.compose
+    depends_on:
+      database:
+        condition: service_healthy
+  
+  frontend:
+    container_name: project3-front-compose
+    ports:
+      - 6124:80
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.compose
