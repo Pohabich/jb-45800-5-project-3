@@ -1,4 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
+import { UniqueConstraintError } from 'sequelize';
 import config from "config"
 import { createHmac } from "crypto";
 import { sign } from "jsonwebtoken";
@@ -58,6 +59,13 @@ export async function signup(request: Request<{}, {}, { id: string, firstName: S
 
         response.json({ jwt })
     } catch (e) {
+        if (e instanceof UniqueConstraintError) {
+            Object.assign(e, {
+                status: 409,
+                message: 'The email is already in use'
+            });
+        }
+
         next(e)
     }
 }
