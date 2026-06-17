@@ -1,4 +1,5 @@
 import Joi from "joi";
+import {Roles} from "@tab761/role-enums"
 
 
 export const loginValidator = Joi.object({
@@ -7,6 +8,8 @@ export const loginValidator = Joi.object({
 })
 
 export const signupValidator = loginValidator.append({
+    id: Joi.string().required(),
     firstName: Joi.string().required(),
-    lastName: Joi.string().required()
+    lastName: Joi.string().required(),
+    role: Joi.string().valid(Roles.ADMIN, Roles.USER).required()
 })

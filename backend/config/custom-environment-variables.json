@@ -1,0 +1,12 @@
+{
+    "app": {
+        "port": "PROJECT3_PORT",
+        "sync": {
+            "force": "PROJECT3_SYNC_FORCE"
+        }
+
+    },
+    "db": {
+        "password": "PROJECT3_DB_PASSWORD"
+    }
+}
