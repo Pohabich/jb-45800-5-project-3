@@ -60,7 +60,7 @@ export async function signup(request: Request<{}, {}, { id: string, firstName: S
         response.json({ jwt })
     } catch (e) {
         if (e instanceof UniqueConstraintError) {
-            Object.assign(e, {
+            next({
                 status: 409,
                 message: 'The email is already in use'
             });

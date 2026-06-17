@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from "joi"
 
 
 export const updateVacationValidator = Joi.object({
@@ -10,5 +10,6 @@ export const updateVacationValidator = Joi.object({
 })
 
 export const newVacationValidator = updateVacationValidator.append({
+    id: Joi.string().uuid().required(),
     imageUrl: Joi.string().required()
 })

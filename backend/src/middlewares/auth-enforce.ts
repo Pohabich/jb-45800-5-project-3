@@ -11,7 +11,8 @@ import User from "../models/User";
 declare global {
     namespace Express {
         interface Request {
-            userId: string
+            userId: string,
+            userRole: string
         }
     }
 }
@@ -26,27 +27,28 @@ export default function authEnforce(request: Request, response: Response, next: 
     // can access the userId using request.userId
     const authHeader = request.get('Authorization')
 
-    if(!authHeader) return next({
+    if (!authHeader) return next({
         status: 401,
         message: 'auth header is missing!'
     })
 
-    if(!authHeader.startsWith('Bearer')) return next({
+    if (!authHeader.startsWith('Bearer')) return next({
         status: 401,
         message: 'you probably use the wrong auth mechanism'
     })
 
     const [bearerWord, jwt] = authHeader.split(' ')
 
-    if(!jwt) return next({
+    if (!jwt) return next({
         status: 401,
         message: 'i see auth header but can not extract a jwt token'
     })
 
     const key = config.get<string>('app.encryptionKey')
-    const { id } = verify(jwt, key) as User
+    const { id, role } = verify(jwt, key) as User
 
     request.userId = id
+    request.userRole = role
 
     next()
 }

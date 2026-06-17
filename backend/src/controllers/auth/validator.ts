@@ -1,5 +1,5 @@
 import Joi from "joi";
-import {Roles} from "@tab761/role-enums"
+import {Roles} from "@tab761/role-enums";
 
 
 export const loginValidator = Joi.object({
