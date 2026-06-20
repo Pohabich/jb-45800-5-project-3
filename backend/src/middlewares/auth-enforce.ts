@@ -3,6 +3,7 @@ import { verify } from "jsonwebtoken";
 import config from 'config'
 import User from "../models/User";
 
+
 // this is a directive for the TS complier
 // to let it know that whenever it compiles an interface
 // named Request that is under Express
@@ -17,7 +18,6 @@ declare global {
     }
 }
 
-
 export default function authEnforce(request: Request, response: Response, next: NextFunction) {
     // this middleware objective are:
     // extract the jwt from the headers
@@ -29,19 +29,19 @@ export default function authEnforce(request: Request, response: Response, next: 
 
     if (!authHeader) return next({
         status: 401,
-        message: 'auth header is missing!'
+        message: 'Auth header is missing!'
     })
 
     if (!authHeader.startsWith('Bearer')) return next({
         status: 401,
-        message: 'you probably use the wrong auth mechanism'
+        message: 'Probably the wrong auth mechanism is used'
     })
 
     const [bearerWord, jwt] = authHeader.split(' ')
 
     if (!jwt) return next({
         status: 401,
-        message: 'i see auth header but can not extract a jwt token'
+        message: 'Can not extract a jwt token from auth header'
     })
 
     const key = config.get<string>('app.encryptionKey')

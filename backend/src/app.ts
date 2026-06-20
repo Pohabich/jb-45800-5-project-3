@@ -19,10 +19,16 @@ import authEnforce from './middlewares/auth-enforce'
     app.use('/auth', authRouter)
     app.use('/', authEnforce)
 
-    // Next 2 MWs are only needed for vacation add/edit route (admin-mode)
-    // so move them to (when the route will be implemented) !!!
+    /*
+    Next 2 MWs are only needed for vacation add/edit route (admin-mode)
+     so move them to (when the route will be implemented) !!!
+     */
     // app.use('/', json())
     // app.use('/', fileUpload())
+
+    /*
+    Each of next routers should use one of the role-validation validation !!!
+    */
 
     app.use('/', notFound)
 

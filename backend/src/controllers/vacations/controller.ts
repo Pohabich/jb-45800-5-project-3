@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express"
 import Vacation from "../../models/Vacation"
-import { Roles } from "@tab761/role-enums"
 
 
 ////////////////
@@ -8,7 +7,8 @@ import { Roles } from "@tab761/role-enums"
 ////////////////
 export async function getAllVacations(request: Request, response: Response, next: NextFunction) {
     try {
-        const vacations = await Vacation.findAll() // TO DO: should users and likes count be added?
+        // TO DO: should users and likes count be added ?
+        const vacations = await Vacation.findAll()
 
         response.json(vacations)
     } catch (error) {
@@ -19,12 +19,6 @@ export async function getAllVacations(request: Request, response: Response, next
 ////////////////////
 // ADMIN only !!! //
 ////////////////////
-/*
-// Should be a middleware of validation
-  if (request.userRole !== Roles.ADMIN) {
-            return next({403,'Access Denied'});
-        }
- */
 export async function getVacationById(request: Request<{ id: string }>, response: Response, next: NextFunction) {
     try {
         const id = request.params.id
@@ -66,22 +60,21 @@ export async function deleteVacation(request: Request<{ id: string }>, response:
 ///////////////////
 // USER only !!! //
 ///////////////////
-/*
-// Should be a middleware of validation
-  if (request.userRole !== Roles.USER) {
-            return next({403,'Access Denied'});
-        }
- */
-
 /** Returns vacations liked by current (authed) user*/
 export async function getUserVacations(request: Request, response: Response, next: NextFunction) {
     //TODO
     //add stuff
+    //getUserLikes?
 }
 export async function getActiveVacations(request: Request, response: Response, next: NextFunction) {
     //TODO
     //add stuff
-} export async function getFutureVacations(request: Request, response: Response, next: NextFunction) {
+}
+export async function getFutureVacations(request: Request, response: Response, next: NextFunction) {
+    //TODO
+    //add stuff
+}
+export async function getVacationLocations(request: Request, response: Response, next: NextFunction) ) {
     //TODO
     //add stuff
 }

@@ -13,3 +13,7 @@ export const newVacationValidator = updateVacationValidator.append({
     id: Joi.string().uuid().required(),
     imageUrl: Joi.string().required()
 })
+
+export const deleteVacationValidatior = Joi.object({
+    id: Joi.string().uuid().required()
+})
