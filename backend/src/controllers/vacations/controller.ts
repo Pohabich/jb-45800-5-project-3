@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express"
 import Vacation from "../../models/Vacation"
+import Like from "../../models/Like"
 
 
 ////////////////
@@ -7,7 +8,6 @@ import Vacation from "../../models/Vacation"
 ////////////////
 export async function getAllVacations(request: Request, response: Response, next: NextFunction) {
     try {
-        // TO DO: should users and likes count be added ?
         const vacations = await Vacation.findAll()
 
         response.json(vacations)
@@ -21,7 +21,7 @@ export async function getAllVacations(request: Request, response: Response, next
 ////////////////////
 export async function getVacationById(request: Request<{ id: string }>, response: Response, next: NextFunction) {
     try {
-        const id = request.params.id
+        const { id } = request.params
         const vacation = await Vacation.findByPk(id)
 
         response.json(vacation)
@@ -29,32 +29,87 @@ export async function getVacationById(request: Request<{ id: string }>, response
         next(error)
     }
 }
-export async function newVacation(request: Request<{}, {}, { id: string, title: string, description: string, startDate: Date, endDate: Date, price: number, imageUrl: string }>, response: Response, next: NextFunction) {
+export async function createVacation(request: Request<{}, {}, { location: string, description: string, startDate: Date, endDate: Date, price: number }>, response: Response, next: NextFunction) {
     try {
-        const vacation = {}
-        //TODO
-        //add stuff
+        const { imageUrl } = request
+        const newVacation = await Vacation.create({
+            ...request.body,
+            imageUrl
+        })
 
-        response.json(vacation)
+        await newVacation.reload({
+            include: [Like]
+        })
+
+        response.json(newVacation)
+
+        // io
+        /*
+        const clientId = request.header('x-client-id')
+        
+                socket.emit(SocketMessages.NEW_VACATION, {
+                    clientId,
+                    vacation: newVacation, 
+                })
+        */
     } catch (error) {
         next(error)
     }
 }
-export async function updateVacation(request: Request<{ id: string }, {}, { id: string, title: string, description: string, startDate: Date, endDate: Date, price: number, imageUrl: string }>, response: Response, next: NextFunction) {
+export async function updateVacation(request: Request<{ id: string, imageUrl?: string }, {}, { location: string, description: string, startDate: Date, endDate: Date, price: number }>, response: Response, next: NextFunction) {
     try {
-        const id = request.params.id
-        const vacation = await Vacation.findByPk(id)
-        //TODO
-        //add stuff
+        const { id, imageUrl } = request.params
+        const { location, description, startDate, endDate, price } = request.body
+        const updateVacation = await Vacation.findByPk(id, {
+            include: [Like]
+        })
 
-        response.json(vacation)
+        updateVacation.location = location
+        updateVacation.description = description
+        updateVacation.startDate = startDate
+        updateVacation.endDate = endDate
+        updateVacation.price = price
+        if (imageUrl) updateVacation.imageUrl = imageUrl
+
+        response.json(updateVacation)
+
+        // io
+        /*
+        const clientId = request.header('x-client-id')
+        
+                socket.emit(SocketMessages.NEW_VACATION, {
+                    clientId,
+                    vacation: updateVacation, 
+                })
+        */
     } catch (error) {
         next(error)
     }
 }
 export async function deleteVacation(request: Request<{ id: string }>, response: Response, next: NextFunction) {
-    //TODO
-    //add stuff
+    try {
+        const { id } = request.params
+        const numberOfDeletions = await Vacation.destroy({ where: { id } })
+
+        if (numberOfDeletions === 0) return next({
+            status: 404,
+            message: 'Trying to delete an non-existing vacation'
+        })
+
+        response.json({ succes: true })
+
+        // io
+        /*
+        const clientId = request.header('x-client-id')
+        
+                socket.emit(SocketMessages.DELETE_VACATION, {
+                    clientId,
+                    vacation: id, 
+                })
+        */
+    } catch (error) {
+        next(error)
+    }
 }
 
 ///////////////////
@@ -74,7 +129,7 @@ export async function getFutureVacations(request: Request, response: Response, n
     //TODO
     //add stuff
 }
-export async function getVacationLocations(request: Request, response: Response, next: NextFunction) ) {
+export async function getVacationLocations(request: Request, response: Response, next: NextFunction) {
     //TODO
     //add stuff
 }

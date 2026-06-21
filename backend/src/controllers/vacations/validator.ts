@@ -9,11 +9,17 @@ export const updateVacationValidator = Joi.object({
     price: Joi.number().min(0).max(10000).required(),
 })
 
-export const newVacationValidator = updateVacationValidator.append({
-    id: Joi.string().uuid().required(),
-    imageUrl: Joi.string().required()
+export const newVacationValidator = updateVacationValidator
+
+export const newVacationFilesValidator = Joi.object({
+    imageUrl: Joi.object({
+        mimetype: Joi.string().valid('image/jpeg', 'image/png'),
+    }).unknown(true).required()
 })
+export const updateVacationFilesValidator = newVacationFilesValidator
 
 export const deleteVacationValidatior = Joi.object({
     id: Joi.string().uuid().required()
 })
+
+export const getVacationValidator = deleteVacationValidatior

@@ -16,6 +16,7 @@ import authEnforce from './middlewares/auth-enforce'
 
     // middlewares
     app.use('/', cors())
+    app.use('/', json())
     app.use('/auth', authRouter)
     app.use('/', authEnforce)
 
@@ -24,7 +25,6 @@ import authEnforce from './middlewares/auth-enforce'
      so move them to (when the route will be implemented) !!!
      */
     // app.use('/', json())
-    // app.use('/', fileUpload())
 
     /*
     Each of next routers should use one of the role-validation validation !!!
