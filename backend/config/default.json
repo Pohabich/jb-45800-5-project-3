@@ -1,7 +1,7 @@
 {
     "app": {
         "port": 3000,
-        "name": "",
+        "name": "Project3_Alexander",
         "sync": {
             "force": false
         },
@@ -13,5 +13,19 @@
         "username": "root",
         "password": "",
         "database": "project3" 
+    },
+     "aws": {
+        "buckets": {
+            "vacation": "com.project3.dev.vacation"
+        },
+        "connection": {
+            "region": "us-east-1",
+            "forcePathStyle": true,
+            "credentials": {
+                "accessKeyId": "test",
+                "secretAccessKey": "test"
+            },
+            "endpoint": "http://localhost:4566"
+        }
     }
 }

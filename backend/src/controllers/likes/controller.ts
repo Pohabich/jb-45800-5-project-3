@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import Like from "../../models/Like"
 import { fn, col } from 'sequelize'
+import Vacation from "../../models/Vacation"
 
 
 ///////////////////
@@ -43,10 +44,12 @@ export async function unLike(request: Request<{}, {}, { userId: string, vacation
  * @param request 
  * @param response 
  * @param next 
- * @returns array of objects {vacationId, likes}
+ * @returns array of object {vacationId, likes}
  */
 export async function getLikesCount(request: Request, response: Response, next: NextFunction) {
     try {
+        // Next works but wo value for NULL
+        /* 
         const likes = await Like.findAll({
             attributes: [
                 'vacationId',
@@ -54,7 +57,21 @@ export async function getLikesCount(request: Request, response: Response, next: 
             ],
             group: ['vacationId'],
             raw: true
-        })
+        })*/
+        const likes = await Vacation.findAll({
+            attributes: [
+                'vacationId',
+                // COALESCE converts NULL into 0 <=> isnull(...) of SQL
+                [fn('COALESCE', fn('COUNT', col('likes.user_id')), 0), 'likes']
+            ],
+            include: [{
+                model: Like,
+                as: 'likes',
+                attributes: [] // Exludes Like from output
+            }],
+            group: ['Vacation.vacation_id'],
+            raw: true
+        });
 
         return likes
     } catch (error) {

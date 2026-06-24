@@ -4,11 +4,6 @@ import config from 'config'
 import User from "../models/User";
 
 
-// this is a directive for the TS complier
-// to let it know that whenever it compiles an interface
-// named Request that is under Express
-// it should allow the usage of a property named userId of type string
-// this is like extending the Express Request object
 declare global {
     namespace Express {
         interface Request {

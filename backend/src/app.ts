@@ -7,6 +7,10 @@ import cors from 'cors'
 import sequelize from './db/sequelize'
 import authRouter from './routers/auth'
 import authEnforce from './middlewares/auth-enforce'
+import { adminValidation, userValidation } from './middlewares/role-validation'
+import adminRouter from './routers/admin'
+import userRouter from './routers/user'
+import { createAppBucketsIfNotExist } from './aws/aws'
 
 
 (async () => {
@@ -20,15 +24,8 @@ import authEnforce from './middlewares/auth-enforce'
     app.use('/auth', authRouter)
     app.use('/', authEnforce)
 
-    /*
-    Next 2 MWs are only needed for vacation add/edit route (admin-mode)
-     so move them to (when the route will be implemented) !!!
-     */
-    // app.use('/', json())
-
-    /*
-    Each of next routers should use one of the role-validation validation !!!
-    */
+    app.use('/api/user', userValidation, userRouter)
+    app.use('/api/admin', adminValidation, adminRouter)
 
     app.use('/', notFound)
 
@@ -40,7 +37,7 @@ import authEnforce from './middlewares/auth-enforce'
     await sequelize.sync({ force: !!config.get('app.sync.force') })
 
     // create S3 bucket
-    //await createAppBucketsIfNotExist()
+    await createAppBucketsIfNotExist()
 
     // starting the server
     app.listen(port, () => console.log(`app ${name} started on port ${port}....`))

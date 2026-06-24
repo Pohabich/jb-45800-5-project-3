@@ -1,11 +1,14 @@
 import { Request, Response, NextFunction } from "express"
 import Vacation from "../../models/Vacation"
 import Like from "../../models/Like"
+import { VacationTimeFilter } from "../enums"
+import { getVacationsPaginatedHelper } from "../helpers"
+import { fn, col } from 'sequelize'
 
 
-////////////////
-// Common use //
-////////////////
+////////////////////
+// ADMIN only !!! //
+////////////////////
 export async function getAllVacations(request: Request, response: Response, next: NextFunction) {
     try {
         const vacations = await Vacation.findAll()
@@ -16,13 +19,10 @@ export async function getAllVacations(request: Request, response: Response, next
     }
 }
 
-////////////////////
-// ADMIN only !!! //
-////////////////////
-export async function getVacationById(request: Request<{ id: string }>, response: Response, next: NextFunction) {
+export async function getVacationById(request: Request<{ vacationId: string }>, response: Response, next: NextFunction) {
     try {
-        const { id } = request.params
-        const vacation = await Vacation.findByPk(id)
+        const { vacationId } = request.params
+        const vacation = await Vacation.findByPk(vacationId)
 
         response.json(vacation)
     } catch (error) {
@@ -56,11 +56,11 @@ export async function createVacation(request: Request<{}, {}, { location: string
         next(error)
     }
 }
-export async function updateVacation(request: Request<{ id: string, imageUrl?: string }, {}, { location: string, description: string, startDate: Date, endDate: Date, price: number }>, response: Response, next: NextFunction) {
+export async function updateVacation(request: Request<{ vacationId: string, imageUrl?: string }, {}, { location: string, description: string, startDate: Date, endDate: Date, price: number }>, response: Response, next: NextFunction) {
     try {
-        const { id, imageUrl } = request.params
+        const { vacationId, imageUrl } = request.params
         const { location, description, startDate, endDate, price } = request.body
-        const updateVacation = await Vacation.findByPk(id, {
+        const updateVacation = await Vacation.findByPk(vacationId, {
             include: [Like]
         })
 
@@ -86,10 +86,10 @@ export async function updateVacation(request: Request<{ id: string, imageUrl?: s
         next(error)
     }
 }
-export async function deleteVacation(request: Request<{ id: string }>, response: Response, next: NextFunction) {
+export async function deleteVacation(request: Request<{ vacationId: string }>, response: Response, next: NextFunction) {
     try {
-        const { id } = request.params
-        const numberOfDeletions = await Vacation.destroy({ where: { id } })
+        const { vacationId } = request.params
+        const numberOfDeletions = await Vacation.destroy({ where: { vacationId } })
 
         if (numberOfDeletions === 0) return next({
             status: 404,
@@ -104,7 +104,7 @@ export async function deleteVacation(request: Request<{ id: string }>, response:
         
                 socket.emit(SocketMessages.DELETE_VACATION, {
                     clientId,
-                    vacation: id, 
+                    vacation: vacationId, 
                 })
         */
     } catch (error) {
@@ -115,21 +115,76 @@ export async function deleteVacation(request: Request<{ id: string }>, response:
 ///////////////////
 // USER only !!! //
 ///////////////////
+export async function getAllVacationsPaginated(request: Request<{ page?: string, limit?: string }>, response: Response, next: NextFunction) {
+    try {
+        const { page, limit } = request.params
+        const vacations = await getVacationsPaginatedHelper({
+            currentUserId: request.userId,
+            page,
+            limit
+        })
+        response.json(vacations)
+    } catch (error) {
+        next(error)
+    }
+}
 /** Returns vacations liked by current (authed) user*/
-export async function getUserVacations(request: Request, response: Response, next: NextFunction) {
-    //TODO
-    //add stuff
-    //getUserLikes?
+export async function getUserVacations(request: Request<{ page?: string, limit?: string }>, response: Response, next: NextFunction) {
+    try {
+        const { page, limit } = request.params
+        const vacations = await getVacationsPaginatedHelper({
+            currentUserId: request.userId,
+            onlyLikedByUser: true,
+            page,
+            limit
+        })
+
+        response.json(vacations)
+    } catch (error) {
+        next(error)
+    }
 }
-export async function getActiveVacations(request: Request, response: Response, next: NextFunction) {
-    //TODO
-    //add stuff
+export async function getActiveVacations(request: Request<{ page?: string, limit?: string }>, response: Response, next: NextFunction) {
+    try {
+        const { page, limit } = request.params
+        const vacations = await getVacationsPaginatedHelper({
+            currentUserId: request.userId,
+            timeFilter: VacationTimeFilter.Ongoing,
+            page,
+            limit
+        })
+
+        response.json(vacations)
+    } catch (error) {
+        next(error)
+    }
 }
-export async function getFutureVacations(request: Request, response: Response, next: NextFunction) {
-    //TODO
-    //add stuff
+export async function getFutureVacations(request: Request<{ page?: string, limit?: string }>, response: Response, next: NextFunction) {
+    try {
+        const { page, limit } = request.params
+        const vacations = await getVacationsPaginatedHelper({
+            currentUserId: request.userId,
+            timeFilter: VacationTimeFilter.Upcoming,
+            page,
+            limit
+        })
+
+        response.json(vacations)
+    } catch (error) {
+        next(error)
+    }
 }
-export async function getVacationLocations(request: Request, response: Response, next: NextFunction) {
-    //TODO
-    //add stuff
+export async function getVacationsLocation(request: Request, response: Response, next: NextFunction) {
+    try {
+        const result = await Vacation.findAll({
+            attributes: [[fn('DISTINCT', col('location')), 'location']],
+            raw: true
+        })
+
+        const locations = (result as unknown as { location: string }[]).map(item => item.location);
+
+        response.json(locations)
+    } catch (error) {
+        next(error)
+    }
 }

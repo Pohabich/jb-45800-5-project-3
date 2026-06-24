@@ -1,4 +1,4 @@
-import { json, Router } from "express";
+import { Router } from "express";
 import bodyValidation from "../middlewares/body-validation";
 import { loginValidator, signupValidator } from "../controllers/auth/validator";
 import { login, signup } from "../controllers/auth/controller";
