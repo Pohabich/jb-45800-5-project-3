@@ -1,15 +1,17 @@
 import { Request, Response, NextFunction } from "express"
 import Like from "../../models/Like"
-import { fn, col } from 'sequelize'
+import { fn, col, literal } from 'sequelize'
 import Vacation from "../../models/Vacation"
 
 
 ///////////////////
 // USER only !!! //
 ///////////////////
-export async function setLike(request: Request<{}, {}, { userId: string, vacationId: string }>, response: Response, next: NextFunction) {
+export async function setLike(request: Request<{}, {}, { vacationId: string }>, response: Response, next: NextFunction) {
     try {
-        const newLike = await Like.create({ ...request.body })
+        const userId = request.userId
+        const { vacationId } = request.body
+        const newLike = await Like.create({ userId, vacationId })
 
         await newLike.reload()
 
@@ -19,10 +21,10 @@ export async function setLike(request: Request<{}, {}, { userId: string, vacatio
     }
 
 }
-export async function unLike(request: Request<{}, {}, { userId: string, vacationId: string }>, response: Response, next: NextFunction) {
+export async function unLike(request: Request<{}, {}, { vacationId: string }>, response: Response, next: NextFunction) {
     try {
-        const { userId, vacationId } = request.body
-
+        const userId = request.userId
+        const { vacationId } = request.body
         const numberOfDeletions = await Like.destroy({ where: { userId, vacationId } })
 
         if (numberOfDeletions === 0) return next({
@@ -48,32 +50,23 @@ export async function unLike(request: Request<{}, {}, { userId: string, vacation
  */
 export async function getLikesCount(request: Request, response: Response, next: NextFunction) {
     try {
-        // Next works but wo value for NULL
-        /* 
-        const likes = await Like.findAll({
-            attributes: [
-                'vacationId',
-                [fn('COUNT', col('user_id')), 'likes']
-            ],
-            group: ['vacationId'],
-            raw: true
-        })*/
         const likes = await Vacation.findAll({
             attributes: [
-                'vacationId',
-                // COALESCE converts NULL into 0 <=> isnull(...) of SQL
-                [fn('COALESCE', fn('COUNT', col('likes.user_id')), 0), 'likes']
+                [fn('DISTINCT', col('location')), 'location'],
+                [
+                    literal(`COALESCE((
+                            SELECT COUNT(*)
+                            FROM likes l
+                            WHERE l.vacation_Id = Vacation.id
+                          ), 0)`
+                    ),
+                    'totalLikes'
+                ]
             ],
-            include: [{
-                model: Like,
-                as: 'likes',
-                attributes: [] // Exludes Like from output
-            }],
-            group: ['Vacation.vacation_id'],
-            raw: true
-        });
+            order: [['location', 'ASC']]
+        })
 
-        return likes
+        response.json(likes)
     } catch (error) {
         next(error)
     }

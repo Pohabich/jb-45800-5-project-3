@@ -18,7 +18,7 @@ adminRouter.post('/vacation', bodyValidation(newVacationValidator), filesValidat
 adminRouter.patch('/vacation/:vacationId', paramsValidation(getVacationValidator), bodyValidation(updateVacationValidator), filesValidation(newVacationFilesValidator), fileUploader, updateVacation)
 adminRouter.delete('/vacation/:vacationId', paramsValidation(deleteVacationValidatior), deleteVacation)
 
-adminRouter.get('/report/chart', getLikesCount)
+adminRouter.get('/reports/likes', getLikesCount)
 // adminRouter.get('report/csv',getCsv)
 
 export default adminRouter

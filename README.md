@@ -10,5 +10,5 @@ npm i @tab761/role-enums
 admin@jbt.com
 123456
 ## user (for ex.)
-emma.johnson@jbt.com
+emma.johnson@example.com
 123456

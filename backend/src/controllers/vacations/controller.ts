@@ -11,7 +11,7 @@ import { fn, col } from 'sequelize'
 ////////////////////
 export async function getAllVacations(request: Request, response: Response, next: NextFunction) {
     try {
-        const vacations = await Vacation.findAll()
+        const vacations = await Vacation.findAll({order: [['startDate', 'ASC']]})
 
         response.json(vacations)
     } catch (error) {

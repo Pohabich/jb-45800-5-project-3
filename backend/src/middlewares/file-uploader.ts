@@ -22,8 +22,6 @@ export default async function fileUploader(request: Request, response: Response,
     }
 
     const buckets = config.get('aws.buckets');
-    // const bucketKey: string = request.originalUrl.replace(new RegExp(`^.*/(.*)/$`), "$1");
-    // // const bucketKey: string = request.originalUrl.replace(new RegExp('^.*/([^/?]+)/?(?:\\?.*)?$'), "$1");
     const bucketKey: string = request.originalUrl.replace(new RegExp('^/[^/]+/[^/]+/([^/?]+).*$'), "$1");
     const image = request.files.imageUrl as UploadedFile
 

@@ -2,7 +2,7 @@ import Joi from "joi";
 
 
 export const setLikeValidator = Joi.object({
-    userId: Joi.string().uuid().required(),
+//    userId: Joi.string().uuid().required(),
     vacationId: Joi.string().uuid().required()
 })
 

@@ -3,12 +3,6 @@ import { parse, isValid } from "date-fns"
 
 
 const customMessages = {
-    // Joi built-in
-    // "string.pattern.base": "Date must be in format YYYY-MM-DD",
-    // "any.required": "Field is required",
-    // "number.base": "Must be a number",
-
-    // custom date validation
     "date.invalid": "Invalid calendar date",
     "date.range": "End date must be >= start date",
     "date.past": "Start date cannot be in the past"
