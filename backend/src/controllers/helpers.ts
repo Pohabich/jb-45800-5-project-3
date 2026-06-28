@@ -15,7 +15,6 @@ function ConvertToNumber(value: string, defaultValue: number): number {
  * @returns 
  */
 export async function getVacationsPaginatedHelper(options: GetVacationsOptions): Promise<PaginatedVacationsResponse> {
-
   const {
     currentUserId,
     page,
@@ -27,20 +26,20 @@ export async function getVacationsPaginatedHelper(options: GetVacationsOptions):
   const limitVal = ConvertToNumber(limit, 9)
   const pageNum = ConvertToNumber(page, 1)
 
-  // --- Attributes ---
+  // --- Attributes --- //
   const attributes: FindAttributeOptions = [
-    'vacationId', 'location', 'description', 'image', 'startDate', 'endDate',
+    'id', 'location', 'description', 'image_url', 'start_date', 'end_date',
     [
-      literal(`(SELECT COUNT(*) FROM likes WHERE likes.vacation_id = Vacation.vacation_id)`),
+      literal(`(SELECT COUNT(*) FROM likes WHERE likes.vacation_id = Vacation.id)`),
       'totalLikes'
     ],
     [
-      literal(`(SELECT COUNT(*) FROM likes WHERE likes.vacation_id = Vacation.vacation_id AND likes.user_id = '${currentUserId}')`),
+      literal(`(SELECT COUNT(*) FROM likes WHERE likes.vacation_id = Vacation.id AND likes.user_id = '${currentUserId}')`),
       'isLiked'
     ]
   ]
 
-  // --- Filters ---
+  // --- Filters --- //
   const whereConditions: WhereOptions<Vacation> = {}
   const now = new Date()
 
@@ -49,6 +48,7 @@ export async function getVacationsPaginatedHelper(options: GetVacationsOptions):
       whereConditions.startDate = { [Op.gt]: now }
       break
     case VacationTimeFilter.Ongoing:
+      whereConditions.startDate = { [Op.lte]: now }
       whereConditions.endDate = { [Op.gt]: now }
       break
     case VacationTimeFilter.All:
@@ -68,7 +68,7 @@ export async function getVacationsPaginatedHelper(options: GetVacationsOptions):
     })
   }
 
-  // --- Execution ---
+  // --- Execution --- //
   const data = (await Vacation.findAll({
     attributes,
     where: whereConditions,
@@ -76,17 +76,17 @@ export async function getVacationsPaginatedHelper(options: GetVacationsOptions):
     limit: limitVal,
     offset: (pageNum - 1) * limitVal,
     raw: true,
-    order: [['startDate', 'ASC']]
+    order: [['start_date', 'ASC']]
   })) as unknown as RawVacationQueryResult[]
 
-  // --- Gether data ---
+  // --- Gether data --- //
   const mappedData = data.map((item): VacationDTO => ({
-    vacationId: item.vacationId,
+    vacationId: item.id,
     location: item.location,
     description: item.description,
-    image: item.image,
-    startDate: new Date(item.startDate),
-    endDate: new Date(item.endDate),
+    image: item.image_url,
+    startDate: new Date(item.start_date),
+    endDate: new Date(item.end_date),
     totalLikes: Number(item.totalLikes),
     isLiked: Number(item.isLiked) > 0
   }))

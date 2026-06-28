@@ -26,12 +26,12 @@ export interface PaginatedVacationsResponse {
 }
 
 export interface RawVacationQueryResult {
-  vacationId: string
+  id: string
   location: string
   description: string
-  image: string
-  startDate: string | Date
-  endDate: string | Date
+  image_url: string
+  start_date: string | Date
+  end_date: string | Date
   totalLikes: string | number
   isLiked: string | number
 }

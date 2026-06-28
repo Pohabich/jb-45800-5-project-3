@@ -11,7 +11,7 @@ import { fn, col } from 'sequelize'
 ////////////////////
 export async function getAllVacations(request: Request, response: Response, next: NextFunction) {
     try {
-        const vacations = await Vacation.findAll({order: [['startDate', 'ASC']]})
+        const vacations = await Vacation.findAll({ order: [['startDate', 'ASC']] })
 
         response.json(vacations)
     } catch (error) {
@@ -115,7 +115,7 @@ export async function deleteVacation(request: Request<{ vacationId: string }>, r
 ///////////////////
 // USER only !!! //
 ///////////////////
-export async function getAllVacationsPaginated(request: Request<{ page?: string, limit?: string }>, response: Response, next: NextFunction) {
+export async function getAllVacationsPaginated(request: Request<{ page: string, limit?: string }>, response: Response, next: NextFunction) {
     try {
         const { page, limit } = request.params
         const vacations = await getVacationsPaginatedHelper({
@@ -129,7 +129,7 @@ export async function getAllVacationsPaginated(request: Request<{ page?: string,
     }
 }
 /** Returns vacations liked by current (authed) user*/
-export async function getUserVacations(request: Request<{ page?: string, limit?: string }>, response: Response, next: NextFunction) {
+export async function getUserVacations(request: Request<{ page: string, limit?: string }>, response: Response, next: NextFunction) {
     try {
         const { page, limit } = request.params
         const vacations = await getVacationsPaginatedHelper({
@@ -144,7 +144,7 @@ export async function getUserVacations(request: Request<{ page?: string, limit?:
         next(error)
     }
 }
-export async function getActiveVacations(request: Request<{ page?: string, limit?: string }>, response: Response, next: NextFunction) {
+export async function getActiveVacations(request: Request<{ page: string, limit?: string }>, response: Response, next: NextFunction) {
     try {
         const { page, limit } = request.params
         const vacations = await getVacationsPaginatedHelper({
@@ -159,7 +159,7 @@ export async function getActiveVacations(request: Request<{ page?: string, limit
         next(error)
     }
 }
-export async function getFutureVacations(request: Request<{ page?: string, limit?: string }>, response: Response, next: NextFunction) {
+export async function getFutureVacations(request: Request<{ page: string, limit?: string }>, response: Response, next: NextFunction) {
     try {
         const { page, limit } = request.params
         const vacations = await getVacationsPaginatedHelper({
@@ -177,8 +177,11 @@ export async function getFutureVacations(request: Request<{ page?: string, limit
 export async function getVacationsLocation(request: Request, response: Response, next: NextFunction) {
     try {
         const result = await Vacation.findAll({
-            attributes: [[fn('DISTINCT', col('location')), 'location']],
-            raw: true
+            attributes: [
+                [fn('DISTINCT', fn('TRIM', col('location'))), 'location']
+            ],
+            raw: true,
+            order: [['location', 'ASC']]
         })
 
         const locations = (result as unknown as { location: string }[]).map(item => item.location);

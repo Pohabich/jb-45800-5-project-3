@@ -2,13 +2,13 @@ import Joi from "joi"
 import { parse, isValid } from "date-fns"
 
 
+// --- date validation stuff -- //
 const customMessages = {
     "date.invalid": "Invalid calendar date",
     "date.range": "End date must be >= start date",
     "date.past": "Start date cannot be in the past"
 }
 const datePattern = /^\d{4}-\d{2}-\d{2}$/
-
 const dateSchema = Joi.string()
     .pattern(datePattern)
     .custom((value, helpers) => {
@@ -26,6 +26,7 @@ const validateNotPast = (value: any, helpers: Joi.CustomHelpers) => {
 
     return (value.startDate < today) ? helpers.error("date.past") : value
 }
+// --- end of date validation stuff --- //
 
 const draftVacationValidator = Joi.object({
     location: Joi.string().required(),
@@ -60,4 +61,9 @@ export const updateVacationFilesValidator = Joi.object({
     imageUrl: Joi.object({
         mimetype: Joi.string().valid('image/jpeg', 'image/png'),
     }).unknown(true).optional()
+})
+
+export const getVacationsValidator = Joi.object({
+    page: Joi.number().required(),
+    limit: Joi.number().optional()
 })

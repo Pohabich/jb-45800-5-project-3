@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express"
 import Like from "../../models/Like"
-import { fn, col, literal } from 'sequelize'
+import { fn, col, literal, UniqueConstraintError } from 'sequelize'
 import Vacation from "../../models/Vacation"
 
 
@@ -17,6 +17,12 @@ export async function setLike(request: Request<{}, {}, { vacationId: string }>, 
 
         response.json(newLike)
     } catch (error) {
+        if (error instanceof UniqueConstraintError) {
+            next({
+                status: 409,
+                message: 'The logged-in user has already liked this vacation'
+            });
+        }
         next(error)
     }
 
@@ -29,7 +35,7 @@ export async function unLike(request: Request<{}, {}, { vacationId: string }>, r
 
         if (numberOfDeletions === 0) return next({
             status: 404,
-            message: 'Trying to unlike an non-existing vacation or vactaion already unliked'
+            message: 'Trying to unlike a non-existing vacation or vacation already unliked'
         })
 
         response.json({ succes: true })
