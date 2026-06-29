@@ -4,9 +4,11 @@
         "sync": {
             "force": "PROJECT3_SYNC_FORCE"
         }
-
     },
     "db": {
         "password": "PROJECT3_DB_PASSWORD"
+    },
+    "openai": {
+        "apiKey": "PROJECT3_OPENAI_API_KEY"
     }
 }

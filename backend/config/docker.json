@@ -1,5 +1,17 @@
 {
+    "app": {
+        "name": "project3 docker"
+    },
     "db": {
         "host": "host.docker.internal"
+    },
+    "io": {
+        "url": "http://host.docker.internal:3004"
+    },
+    "aws": {
+        "bucket": "com.project3.docker",
+        "connection": {
+            "endpoint": "http://host.docker.internal:4566"
+        }
     }
 }

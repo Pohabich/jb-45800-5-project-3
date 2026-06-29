@@ -12,9 +12,12 @@
         "port": 3306,
         "username": "root",
         "password": "",
-        "database": "project3" 
+        "database": "project3"
     },
-     "aws": {
+    "io": {
+        "url": "http://localhost:3004"
+    },
+    "aws": {
         "buckets": {
             "vacation": "com.project3.dev.vacation"
         },
@@ -27,5 +30,8 @@
             },
             "endpoint": "http://localhost:4566"
         }
+    },
+    "openai": {
+        "apiKey": ""
     }
 }

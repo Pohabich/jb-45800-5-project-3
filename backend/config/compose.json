@@ -1,5 +1,20 @@
 {
+    "app": {
+        "name": "project3 compose"
+    },
     "db": {
         "host": "database"
+    },
+    "io": {
+        "url": "http://io:3004"
+    },
+    "mcp": {
+        "server": "http://mcp:3005/mcp"
+    },
+    "aws": {
+        "bucket": "com.project3.compose",
+        "connection": {
+            "endpoint": "http://localstack:4566"
+        }
     }
 }
