@@ -5,9 +5,15 @@ import paramsValidation from "../middlewares/params-validation";
 import { setLikeValidator, unLikeValidator } from "../controllers/likes/validator";
 import { setLike, unLike } from "../controllers/likes/controller";
 import bodyValidation from "../middlewares/body-validation";
+import { getRecommendation } from "../controllers/recommendations/controller";
+import { getRecommendationValidator } from "../controllers/recommendations/validator";
 
 
 const userRouter = Router()
+
+// AI
+userRouter.get('/vacations/locations', getVacationsLocation)
+userRouter.get('/vacations/recommendation/:location', paramsValidation(getRecommendationValidator), getRecommendation)
 
 // Likes
 userRouter.post('/vacation/like', bodyValidation(setLikeValidator), setLike)
@@ -19,10 +25,6 @@ userRouter.get('/vacations/favorite/:page/:limit', paramsValidation(getVacations
 userRouter.get('/vacations/present/:page/:limit', paramsValidation(getVacationsValidator), getActiveVacations)
 userRouter.get('/vacations/future/:page/:limit', paramsValidation(getVacationsValidator), getFutureVacations)
 userRouter.get('/vacations/:page/:limit', paramsValidation(getVacationsValidator), getAllVacationsPaginated)
-
-// AI
-userRouter.get('/vacations/locations', getVacationsLocation)
-// see aiRouter for get data
 
 // MCP
 // separated part

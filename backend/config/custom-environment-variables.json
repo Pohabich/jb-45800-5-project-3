@@ -8,7 +8,7 @@
     "db": {
         "password": "PROJECT3_DB_PASSWORD"
     },
-    "openai": {
-        "apiKey": "PROJECT3_OPENAI_API_KEY"
+    "ai": {
+        "apiKey": "PROJECT3_AI_API_KEY"
     }
 }
