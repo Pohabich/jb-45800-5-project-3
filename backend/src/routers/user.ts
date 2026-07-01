@@ -7,6 +7,8 @@ import { setLike, unLike } from "../controllers/likes/controller";
 import bodyValidation from "../middlewares/body-validation";
 import { getRecommendation } from "../controllers/recommendations/controller";
 import { getRecommendationValidator } from "../controllers/recommendations/validator";
+import { freeTextRequest } from "../controllers/free-text/controller";
+import { freeTextRequestValidator } from "../controllers/free-text/validator";
 
 
 const userRouter = Router()
@@ -20,13 +22,13 @@ userRouter.post('/vacation/like', bodyValidation(setLikeValidator), setLike)
 userRouter.delete('/vacation/unlike', bodyValidation(unLikeValidator), unLike)
 
 // Vacation filters
-//TODO: add middelware to extract page and limit values
+//TODO: add middelware to extract page and limit values?
 userRouter.get('/vacations/favorite/:page/:limit', paramsValidation(getVacationsValidator), getUserVacations)
 userRouter.get('/vacations/present/:page/:limit', paramsValidation(getVacationsValidator), getActiveVacations)
 userRouter.get('/vacations/future/:page/:limit', paramsValidation(getVacationsValidator), getFutureVacations)
 userRouter.get('/vacations/:page/:limit', paramsValidation(getVacationsValidator), getAllVacationsPaginated)
 
-// MCP
-// separated part
+// Free text search (MCP)
+userRouter.post('/free-text', bodyValidation(freeTextRequestValidator), freeTextRequest)
 
 export default userRouter

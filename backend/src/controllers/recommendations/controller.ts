@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express"
-import ai from "../../openai/gemini"
+import ai from "../../ai/gemini"
 
 
 export async function getRecommendation(request: Request<{ location: string }>, response: Response, next: NextFunction) {

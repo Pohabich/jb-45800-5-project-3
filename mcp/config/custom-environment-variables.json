@@ -1,0 +1,8 @@
+{
+    "app": {
+        "port": "PROJECT3_MCP_PORT"
+    },
+    "backend": {
+        "url": "PROJECT3_BACKEND_URL"
+    }
+}

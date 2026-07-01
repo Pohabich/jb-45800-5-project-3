@@ -9,6 +9,7 @@
         "password": "PROJECT3_DB_PASSWORD"
     },
     "ai": {
-        "apiKey": "PROJECT3_AI_API_KEY"
+        "apiKey": "PROJECT3_AI_API_KEY",
+        "mcpApiKey": "PROJECT3_MCP_API_KEY"
     }
 }
