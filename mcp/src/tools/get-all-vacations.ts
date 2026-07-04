@@ -8,7 +8,7 @@ export function registerGetAllVacationsTool(server: McpServer) {
     server.registerTool(
         'getAllVacationsPaginated',
         {
-            description: 'Get all vacations paginated',
+            description: 'Get all vacations including startdate, enddate, price, location, description, and likes',
             inputSchema: z.object({}),
         },
         async () => handleBackendTool(() => getAllVacations())

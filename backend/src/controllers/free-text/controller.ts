@@ -34,7 +34,6 @@ Output rules:
 Tool behavior:
 - Tools represent backend functions connected to a database or server logic.
 - Treat tool results as the single source of truth.
-- Tools may return partial data (by page) 
 - Tools output is a lists of structured objects.
 Response style:
 - Be concise.
@@ -53,7 +52,7 @@ Response style:
             tools: [
                 {
                     type: 'mcp',
-                    server_label: 'betterx',
+                    server_label: 'project3',
                     server_url: mcpUrl,
                     allowed_tools: project3McpTools,
                     headers: {
