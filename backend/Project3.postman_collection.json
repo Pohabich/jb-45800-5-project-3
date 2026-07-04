@@ -1,0 +1,783 @@
+{
+  "info": {
+    "_postman_id": "91505c90-b4a4-4d2e-8f30-a0def23859c5",
+    "name": "Project3",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53516020",
+    "_collection_link": "https://go.postman.co/collection/53516020-91505c90-b4a4-4d2e-8f30-a0def23859c5?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "admin",
+      "item": [
+        {
+          "name": "admin_get_all_vacations",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_0pfh}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/admin/vacations",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "admin",
+                "vacations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "admin_edit_vacation",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_14gn}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "location",
+                  "value": "  Moscow",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "  Cremlin, Red square, museumses and more over",
+                  "type": "text"
+                },
+                {
+                  "key": "startDate",
+                  "value": "2026-07-05",
+                  "type": "text"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2026-07-26",
+                  "type": "text"
+                },
+                {
+                  "key": "price",
+                  "value": " 2000",
+                  "type": "text"
+                },
+                {
+                  "key": "imageUrl",
+                  "type": "file",
+                  "uuid": "eb0e3ca7-28e5-477b-92b3-61c514835ae0",
+                  "src": "/C:/Users/tab762/Desktop/red-square.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/admin/vacation/1422a7a5-d3c0-4e3d-9b06-a291c79ab698",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "admin",
+                "vacation",
+                "1422a7a5-d3c0-4e3d-9b06-a291c79ab698"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "admin_new_vacation",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_secret_14gn}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "location",
+                  "value": "Jerusalem",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": " Western wal",
+                  "type": "text"
+                },
+                {
+                  "key": "startDate",
+                  "value": "2026-06-18",
+                  "type": "text"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2026-08-24",
+                  "type": "text"
+                },
+                {
+                  "key": "price",
+                  "value": " 1000",
+                  "type": "text"
+                },
+                {
+                  "key": "imageUrl",
+                  "type": "file",
+                  "src": "/C:/Users/tab762/Desktop/western-wall.jpeg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/admin/vacation/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "admin",
+                "vacation",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "admin_likes",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_secret_11wq}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/admin/reports/likes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "admin",
+                "reports",
+                "likes"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "user_like_vacation",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_0nc8}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"vacationId\": \"8b2d4f6a-1c3e-4a7b-9d5c-0e1f2a3b4c51\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/user/vacation/like",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "user",
+                "vacation",
+                "like"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user_get_favorite_vacations",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_0nc8}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/user/vacations/favorite/1/9",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "user",
+                "vacations",
+                "favorite",
+                "1",
+                "9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user_get_present_vacations",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_secret_0nc8}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/user/vacations/present/1/9",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "user",
+                "vacations",
+                "present",
+                "1",
+                "9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user_get_future_vacations",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_secret_0nc8}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/user/vacations/future/1/9",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "user",
+                "vacations",
+                "future",
+                "1",
+                "9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user_get_future_vacations_but_admin",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_14fj}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/user/vacations/future/1/9",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "user",
+                "vacations",
+                "future",
+                "1",
+                "9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user_get_all_vacations",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_0nc8}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/user/vacations/1/9",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "user",
+                "vacations",
+                "1",
+                "9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user_dislike_vacation",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_0nc8}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"vacationId\": \"8b2d4f6a-1c3e-4a7b-9d5c-0e1f2a3b4c51\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/user/vacation/unlike",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "user",
+                "vacation",
+                "unlike"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user_get_vacations_locations",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_0nc8}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/user/vacations/locations",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "user",
+                "vacations",
+                "locations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user_get_ai_recommendation",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_18hf}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/user/vacations/recommendation/Moscow",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "user",
+                "vacations",
+                "recommendation",
+                "Moscow"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user_free_text_recommedation",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_114c}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"prompt\": \"Get 3 most popular vacations\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/user/free-text",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "user",
+                "free-text"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "signup_duplicated",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": \"ccd4cc2a-8f43-4428-a3c6-080547500540\",\r\n    \"email\": \"admin@jbt.com\",\r\n    \"password\":\"123456\",\r\n    \"firstName\":\"Site\",\r\n    \"lastName\": \"God\",\r\n    \"role\": \"USER\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/signup",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "signup_admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": \"aa767ca2-49fb-48c1-b93c-4ade882ab1a9\",\r\n    \"email\": \"admin@jbt.com\",\r\n    \"password\":\"123456\",\r\n    \"firstName\":\"Site\",\r\n    \"lastName\": \"God\",\r\n    \"role\": \"ADMIN\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "signup_user",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": \"ccd4cc2a-8f43-4428-a3c6-080547500540\",\r\n    \"email\": \"user@jbt.com\",\r\n    \"password\":\"123456\",\r\n    \"firstName\":\"User\",\r\n    \"lastName\": \"Tester\",\r\n    \"role\": \"USER\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/signup",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login_admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"admin@jbt.com\",\r\n    \"password\":\"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login_user",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"emma.johnson@example.com\",\r\n    \"password\":\"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/login/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "login",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "mcp_ping",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://sauna-reliably-occupancy.ngrok-free.dev/mcp/ping",
+          "protocol": "https",
+          "host": [
+            "sauna-reliably-occupancy",
+            "ngrok-free",
+            "dev"
+          ],
+          "path": [
+            "mcp",
+            "ping"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "supabase_service_role_api_key_0pfh",
+      "secret": true
+    },
+    {
+      "key": "supabase_service_role_api_key_14gn",
+      "secret": true
+    },
+    {
+      "key": "auth_secret_14gn",
+      "secret": true
+    },
+    {
+      "key": "auth_secret_11wq",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0a30",
+      "secret": true
+    },
+    {
+      "key": "supabase_service_role_api_key_0nc8",
+      "secret": true
+    },
+    {
+      "key": "auth_secret_0nc8",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_14fj",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_18hf",
+      "secret": true
+    },
+    {
+      "key": "supabase_service_role_api_key_114c",
+      "secret": true
+    }
+  ]
+}
