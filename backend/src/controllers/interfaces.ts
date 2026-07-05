@@ -16,6 +16,7 @@ export interface VacationDTO {
   image: string
   startDate: Date
   endDate: Date
+  price: number
   totalLikes: number
   isLiked: boolean
 }
@@ -32,6 +33,7 @@ export interface RawVacationQueryResult {
   image_url: string
   start_date: string | Date
   end_date: string | Date
+  price: number | string
   totalLikes: string | number
   isLiked: string | number
 }

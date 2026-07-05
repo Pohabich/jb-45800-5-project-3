@@ -1,0 +1,56 @@
+.VacationCard {
+    width: 250px;
+    aspect-ratio: 0.7;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .15);
+    display: grid;
+    grid-template-rows: 3.7fr 0.9fr 4.2fr 1.2fr;
+}
+
+.VacationCard .vacation-image {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+}
+
+.VacationCard .location {
+    color: white;
+    font-size: 1rem;
+    margin: 20px;
+    text-shadow: 1px 1px 5px black;
+}
+
+.VacationCard .dates {
+    grid-row: 2;
+    background: #bde4ff;
+    padding: 14px 18px;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.VacationCard .description {
+    padding: 5px 10px;
+    grid-row: 3;
+    color: #555;
+    line-height: 1.15;
+}
+
+.VacationCard button {
+    grid-row: 4;
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #1e88e5;
+    color: white;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}

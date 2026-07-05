@@ -28,7 +28,7 @@ export async function getVacationsPaginatedHelper(options: GetVacationsOptions):
 
   // --- Attributes --- //
   const attributes: FindAttributeOptions = [
-    'id', 'location', 'description', 'image_url', 'start_date', 'end_date',
+    'id', 'location', 'description', 'image_url', 'start_date', 'end_date', 'price',
     [
       literal(`(SELECT COUNT(*) FROM likes WHERE likes.vacation_id = Vacation.id)`),
       'totalLikes'
@@ -87,6 +87,7 @@ export async function getVacationsPaginatedHelper(options: GetVacationsOptions):
     image: item.image_url,
     startDate: new Date(item.start_date),
     endDate: new Date(item.end_date),
+    price: Number(item.price),
     totalLikes: Number(item.totalLikes),
     isLiked: Number(item.isLiked) > 0
   }))

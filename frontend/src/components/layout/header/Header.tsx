@@ -23,21 +23,21 @@ export default function Header() {
             <div>
                 {role === Roles.USER && (
                     <>
-                        <NavLink to="/filters">Vacations</NavLink>
-                        | <NavLink to="/recommendations">Recommendations</NavLink>
-                        | <NavLink to="/mcp">Questions</NavLink>
+                        <NavLink to="/vacations">Vacations</NavLink>
+                        <NavLink to="/recommendations">Recommendations</NavLink>
+                        <NavLink to="/my-questions">Questions</NavLink>
                     </>
                 )}
 
                 {role === Roles.ADMIN && (
                     <>
                         <NavLink to="/vacations">Vacations</NavLink>
-                        | <NavLink to="/reports">Reports</NavLink>
+                        <NavLink to="/reports">Reports</NavLink>
                     </>
                 )}
             </div>
             <div className="greeting">
-                Welcome,<i> {name}</i> | <button onClick={logMeOut}>Logout</button>
+                Welcome, <i>{name}</i> | <button onClick={logMeOut}>Logout</button>
             </div>
         </div>
     )

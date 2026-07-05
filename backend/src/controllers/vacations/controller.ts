@@ -42,16 +42,6 @@ export async function createVacation(request: Request<{}, {}, { location: string
         })
 
         response.json(newVacation)
-
-        // io
-        /*
-        const clientId = request.header('x-client-id')
-        
-                socket.emit(SocketMessages.NEW_VACATION, {
-                    clientId,
-                    vacation: newVacation, 
-                })
-        */
     } catch (error) {
         next(error)
     }
