@@ -4,6 +4,6 @@ export default interface User extends Login {
     id: string,
     firstName: string,
     lastName: string,
-    email: string
+    email: string,
     role: string
 }

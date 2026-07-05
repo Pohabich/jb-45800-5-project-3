@@ -15,3 +15,45 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     width: 320px;
 }
+
+.Login .title {
+    margin-top: 0px;
+    margin-bottom: 20px;
+    color: #1e88e5;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.Login input {
+    height: 40px;
+    margin-top: 15px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.Login button {
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #1e88e5;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.Login button:hover {
+    background-color: #1976d2;
+}
+
+.Login button:active {
+    background-color: #1565c0;
+}
+
+.Login .error {
+    color: #e0245e;
+    font-size: 0.75rem;
+}

@@ -1,0 +1,36 @@
+.Header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+}
+
+.Header a {
+  text-decoration: none;
+  color: #536471;
+  font-weight: 600;
+  font-size: 1.5rem;
+  padding: 6px 12px;
+  border-radius: 20px;
+  transition: background-color 0.2s;
+}
+
+.Header a:hover {
+  background-color: #f0f2f5;
+}
+
+.Header .active {
+  color: #1d9bf0;
+  font-weight: 700;
+}
+
+.Header .greeting {
+  color: #536471;
+  padding-top: 0px;
+  padding-bottom: 6px;
+  margin-right: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
