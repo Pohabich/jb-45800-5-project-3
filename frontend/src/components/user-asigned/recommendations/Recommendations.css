@@ -1,0 +1,44 @@
+.Recommendations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.Recommendations button {
+    margin: 10px 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #1e88e5;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.Recommendations button:hover {
+    background-color: #1976d2;
+}
+
+.Recommendations button:active {
+    background-color: #1565c0;
+}
+
+.Recommendations select {
+    margin: 10px 20px;
+    padding: 10px 15px;
+    border: 2px solid #3498db;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.Recommendations .loader {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #64748b;
+    padding: 40px 0;
+}

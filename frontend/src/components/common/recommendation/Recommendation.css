@@ -1,0 +1,76 @@
+.Recommendation {
+    margin: 20px auto;
+    color: #1e293b;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.Recommendation .rec-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.Recommendation .key-place-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.Recommendation .key-place-desc {
+    font-size: 1rem;
+    color: #334155;
+    margin-bottom: 24px;
+}
+
+.Recommendation .section-subtitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.Recommendation .highlights-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 24px;
+}
+
+.Recommendation .highlight-item {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.Recommendation .highlight-name {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.Recommendation .highlight-desc {
+    color: #475569;
+}
+
+.Recommendation .dash {
+    color: #94a3b8;
+}
+
+.Recommendation .tip-text {
+    font-size: 0.95rem;
+    color: #334155;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.Recommendation .tip-topic {
+    font-weight: 600;
+}
+
+.Recommendation .emoji,
+.tip-bulb {
+    flex-shrink: 0;
+}
