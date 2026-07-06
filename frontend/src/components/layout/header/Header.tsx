@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import useUsername from "../../../hooks/use-username"
 import "./Header.css"
 import AuthContext from "../../auth/auth/AuthContext"
@@ -37,7 +37,7 @@ export default function Header() {
                 )}
             </div>
             <div className="greeting">
-                Welcome, <i>{name}</i> | <button onClick={logMeOut}>Logout</button>
+                Welcome, <i>{name}</i> | <Link to="/login" onClick={logMeOut} className="logout-link">Logout</Link>
             </div>
         </div>
     )

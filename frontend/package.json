@@ -14,13 +14,14 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
     "@tab761/role-enums": "^1.0.0",
+    "@types/react-paginate": "^7.1.4",
     "axios": "^1.16.1",
     "jwt-decode": "^4.0.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-hook-form": "^7.76.1",
     "react-hot-toast": "^2.6.0",
-    "react-redux": "^9.2.0",
+    "react-paginate": "^8.3.0",
     "react-router-dom": "^7.15.1",
     "uuid": "^14.0.0"
   },

@@ -4,9 +4,9 @@ import { Roles } from "@tab761/role-enums"
 import NotFound from "../../not-found/NotFound"
 import Reports from "../../admin-asigned/reports/Reports"
 import Vacations from "../../admin-asigned/vacations/Vacations"
-import Filters from "../../user-asigned/home/Home"
 import Mcp from "../../user-asigned/mcp/Mcp"
 import Recommendations from "../../user-asigned/recommendations/Recommendations"
+import Home from "../../user-asigned/home/Home"
 
 
 export default function Main() {
@@ -17,7 +17,7 @@ export default function Main() {
             {/* Asigned to Users */}
             {role === Roles.USER && (<>
                 <Route path="/" element={<Navigate to="/vacations" />} />
-                <Route path="/vacations" element={<Filters />} />
+                <Route path="/vacations" element={<Home />} />
                 <Route path="/recommendations" element={<Recommendations />} />
                 <Route path="/my-questions" element={<Mcp />} />
             </>)}

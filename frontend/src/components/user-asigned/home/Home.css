@@ -12,3 +12,42 @@
     flex-wrap: wrap;
     height: fit-content;
 }
+
+.Home .filters-panel {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.Home .filters-panel button {
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #475569;
+}
+
+.Home .filters-panel button.active-filter {
+  background-color: #1e88e5;
+  color: #ffffff;
+  border-color: #1e88e5;
+}
+
+.Home .loader {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #64748b;
+  padding: 40px 0;
+}
+
+.Home .empty-state {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #64748b;
+  padding: 60px 0;
+  font-weight: 500;
+}
