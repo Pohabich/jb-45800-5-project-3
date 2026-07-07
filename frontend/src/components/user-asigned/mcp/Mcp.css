@@ -1,0 +1,51 @@
+.Mcp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Mcp .mcp-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    padding: 20px;
+}
+
+.Mcp button {
+    margin: 10px 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #1e88e5;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.Mcp button:hover {
+    background-color: #1976d2;
+}
+
+.Mcp button:active {
+    background-color: #1565c0;
+}
+
+.Mcp textarea {
+    margin: 10px 20px;
+    padding: 10px 15px;
+    border: 2px solid #3498db;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.Mcp .loader {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #64748b;
+    padding: 40px 0;
+}

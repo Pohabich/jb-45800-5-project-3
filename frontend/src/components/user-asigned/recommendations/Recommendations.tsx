@@ -59,10 +59,10 @@ export default function Recommendtions() {
             {loading ? (
                 <div className="loader">Loading data...</div>
             ) :
-                !recommendation ? (
-                    <div></div>
-                ) : (
+                recommendation ? (
                     <Recommendation data={recommendation} />
+                ) : (
+                    <div></div>
                 )}
         </div>
     )

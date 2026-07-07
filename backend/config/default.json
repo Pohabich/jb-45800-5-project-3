@@ -14,9 +14,6 @@
         "password": "",
         "database": "project3"
     },
-    "io": {
-        "url": "http://localhost:3004"
-    },
     "mcp": {
         "server": "https://sauna-reliably-occupancy.ngrok-free.dev/mcp"
     },

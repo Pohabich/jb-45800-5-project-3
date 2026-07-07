@@ -1,22 +1,23 @@
 .Home {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    height: 100%;
-    background-color: var(--bg-main);
+  height: 100%;
+  background-color: var(--bg-main);
 }
 
 .Home .vacations-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: fit-content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: fit-content;
 }
 
 .Home .filters-panel {
   display: flex;
   gap: 12px;
   justify-content: center;
+  margin-top: 48px;
   margin-bottom: 24px;
   align-items: center;
 }
