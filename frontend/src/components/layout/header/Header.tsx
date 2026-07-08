@@ -37,7 +37,7 @@ export default function Header() {
                 )}
             </div>
             <div className="greeting">
-                Welcome, <i>{name}</i> <Link to="/login" onClick={logMeOut} className="logout-link">Logout</Link>
+                Welcome, <b><i>{name}</i></b> <Link to="/login" onClick={logMeOut} className="logout-link">Logout</Link>
             </div>
         </div>
     )

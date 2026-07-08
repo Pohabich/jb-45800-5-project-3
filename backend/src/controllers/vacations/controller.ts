@@ -13,8 +13,8 @@ export async function getAllVacations(request: Request, response: Response, next
     try {
         const vacations = await Vacation.findAll({
             attributes: {
-                include: [['id', 'vacationId']],
-                exclude: ['id']
+                include: [['id', 'vacationId'], ['image_Url', 'image']],
+                exclude: ['id', 'image_Url']
             },
             order: [['startDate', 'ASC']]
         })

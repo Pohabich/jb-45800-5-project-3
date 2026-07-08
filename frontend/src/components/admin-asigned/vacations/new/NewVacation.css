@@ -1,0 +1,62 @@
+.NewVacation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.NewVacation>form {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 0 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 320px;
+}
+
+.NewVacation>form .title {
+    color: #1e88e5;
+}
+
+.NewVacation>form .btnSubmit {
+    background-color: #1e88e5;
+    color: #ffffff;
+    border-color: #1e88e5;
+}
+
+.NewVacation>form .btnCancel {
+    color: #64748b;
+}
+
+.NewVacation>form label {
+    margin-bottom: 5px;
+}
+
+.NewVacation>form input,
+textarea,
+button {
+    margin-bottom: 20px;
+    height: 40px;
+    border: 3px solid #e2e8f0;
+    border-radius: 6px;
+}
+
+.NewVacation>form img {
+    max-width: 300px;
+    height: auto;
+}
+
+.NewVacation>form button {
+    font-size: 1rem;
+}
+
+.NewVacation>form input[type="file"] {
+    border: none;
+}
+
+.NewVacation>form input[type="file"]::file-selector-button {
+    color: #64748b;
+    background-color: transparent;
+    border: 1px solid #e2e8f0;
+    border-radius: 3px;
+}
