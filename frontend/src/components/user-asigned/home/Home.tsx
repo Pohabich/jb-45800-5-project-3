@@ -10,7 +10,7 @@ import './Pagination.css'
 import { showErrorToast } from '../../common/show-error-toast'
 import type Vacation from '../../../models/Vacation'
 import type VacationResponse from '../../../models/VacationResponse'
-import VacationsService from '../../../services/auth-aware/users/Vacations'
+import VacationsService from '../../../services/auth-aware/Vacations'
 import useService from '../../../hooks/use-service'
 import LikesService from '../../../services/auth-aware/users/Likes'
 // Next is only way to get react-paginate to work with TypeScript and Vite
@@ -18,6 +18,7 @@ import * as ReactPaginateModule from 'react-paginate'
 const ReactPaginate = ((ReactPaginateModule as any).default?.default ||
     (ReactPaginateModule as any).default ||
     ReactPaginateModule) as any
+
 
 const ITEMS_PER_PAGE = 9
 
@@ -41,34 +42,36 @@ export default function Home() {
 
     useEffect(() => {
         const fetchVacations = async () => {
-            setLoading(true)
             try {
                 let response: VacationResponse
+
+                setLoading(true)
                 switch (currentFilter) {
                     case Filters.All:
-                        response = await vacationsService.getAllVacations(page, ITEMS_PER_PAGE)
+                        response = await vacationsService.getAllVacationsByPage(page, ITEMS_PER_PAGE)
                         break;
 
                     case Filters.Active:
-                        response = await vacationsService.getPresentVacations(page, ITEMS_PER_PAGE)
+                        response = await vacationsService.getPresentVacationsByPage(page, ITEMS_PER_PAGE)
                         break;
 
                     case Filters.Future:
-                        response = await vacationsService.getFutureVacations(page, ITEMS_PER_PAGE)
+                        response = await vacationsService.getFutureVacationsByPage(page, ITEMS_PER_PAGE)
                         break;
 
                     case Filters.Favorites:
                         console.log('Favorites filter selected')
-                        response = await vacationsService.getFavoriteVacations(page, ITEMS_PER_PAGE)
+                        response = await vacationsService.getFavoriteVacationsByPage(page, ITEMS_PER_PAGE)
                         break;
 
                     default:
-                        response = await vacationsService.getAllVacations(page, ITEMS_PER_PAGE)
+                        response = await vacationsService.getAllVacationsByPage(page, ITEMS_PER_PAGE)
                 }
 
                 setVacations(response!.mappedData)
                 setTotalPages(response!.totalPages)
             } catch (error) {
+                console.error("Error fetching vacations:", error)
                 showErrorToast('Failed to load vacations')
             } finally {
                 setLoading(false)

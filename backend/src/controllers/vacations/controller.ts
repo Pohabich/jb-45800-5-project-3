@@ -11,7 +11,13 @@ import { fn, col } from 'sequelize'
 ////////////////////
 export async function getAllVacations(request: Request, response: Response, next: NextFunction) {
     try {
-        const vacations = await Vacation.findAll({ order: [['startDate', 'ASC']] })
+        const vacations = await Vacation.findAll({
+            attributes: {
+                include: [['id', 'vacationId']],
+                exclude: ['id']
+            },
+            order: [['startDate', 'ASC']]
+        })
 
         response.json(vacations)
     } catch (error) {

@@ -3,10 +3,12 @@ import useRole from "../../../hooks/use-role"
 import { Roles } from "@tab761/role-enums"
 import NotFound from "../../not-found/NotFound"
 import Reports from "../../admin-asigned/reports/Reports"
-import Vacations from "../../admin-asigned/vacations/Vacations"
+import Vacations from "../../admin-asigned/vacations/vacations/Vacations"
 import Mcp from "../../user-asigned/mcp/Mcp"
 import Recommendations from "../../user-asigned/recommendations/Recommendations"
 import Home from "../../user-asigned/home/Home"
+import UpdateVacation from "../../admin-asigned/vacations/update/UpdateVacation"
+import NewVacation from "../../admin-asigned/vacations/new/NewVacation"
 
 
 export default function Main() {
@@ -25,6 +27,8 @@ export default function Main() {
             {/* Assigned to admins */}
             {role === Roles.ADMIN && (<>
                 <Route path="/" element={<Navigate to="/vacations" />} />
+                <Route path="/vacations/add" element={<NewVacation />} />
+                <Route path="/vacations/edit/:id" element={<UpdateVacation />} />
                 <Route path="/vacations" element={<Vacations />} />
                 <Route path="/reports" element={<Reports />} />
             </>
