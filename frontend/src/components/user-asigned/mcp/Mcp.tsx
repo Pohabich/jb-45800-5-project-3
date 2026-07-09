@@ -1,6 +1,6 @@
 import { useState } from "react"
 import useService from "../../../hooks/use-service"
-import McpService from "../../../services/auth-aware/users/Mcp"
+import McpService from "../../../services/auth-aware/user-only/Mcp"
 import "./Mcp.css"
 import { showErrorToast } from "../../common/show-error-toast"
 

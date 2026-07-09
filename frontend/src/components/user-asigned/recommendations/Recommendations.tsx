@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import "./Recommendations.css"
 import Recommendation from "../../common/recommendation/Recommendation"
 import useService from "../../../hooks/use-service"
-import RecommendationService from "../../../services/auth-aware/users/Recommendation"
+import RecommendationService from "../../../services/auth-aware/user-only/Recommendation"
 import { showErrorToast } from "../../common/show-error-toast"
 import type RecommendationResponse from "../../../models/RecommendationResponse"
 

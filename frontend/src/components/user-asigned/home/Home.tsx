@@ -10,9 +10,9 @@ import './Pagination.css'
 import { showErrorToast } from '../../common/show-error-toast'
 import type Vacation from '../../../models/Vacation'
 import type VacationResponse from '../../../models/VacationResponse'
-import VacationsService from '../../../services/auth-aware/Vacations'
+import VacationsService from '../../../services/auth-aware/user-only/Vacations'
 import useService from '../../../hooks/use-service'
-import LikesService from '../../../services/auth-aware/users/Likes'
+import LikesService from '../../../services/auth-aware/user-only/Likes'
 // Next is only way to get react-paginate to work with TypeScript and Vite
 import * as ReactPaginateModule from 'react-paginate'
 const ReactPaginate = ((ReactPaginateModule as any).default?.default ||

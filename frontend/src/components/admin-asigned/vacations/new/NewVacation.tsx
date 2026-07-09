@@ -4,8 +4,8 @@ import type Vacation from '../../../../models/Vacation'
 import './NewVacation.css'
 import { useEffect, useState, type ChangeEvent } from 'react'
 import useService from '../../../../hooks/use-service'
-import VacationsService from '../../../../services/auth-aware/Vacations'
 import { showErrorToast } from '../../../common/show-error-toast'
+import VacationsService from '../../../../services/auth-aware/admin-only/Vacations'
 
 
 export default function NewVacation() {

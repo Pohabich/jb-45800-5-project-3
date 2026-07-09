@@ -2,11 +2,11 @@ import "./Vacations.css"
 import { useEffect, useState } from "react"
 import useService from "../../../../hooks/use-service"
 import type Vacation from "../../../../models/Vacation"
-import VacationsService from "../../../../services/auth-aware/Vacations"
 import { showErrorToast } from "../../../common/show-error-toast"
 import VacationCard from "../../../common/vacation/VacationCard"
 import { useNavigate } from "react-router-dom"
 import Crud from "../../../common/crud-panel/Crud"
+import VacationsService from "../../../../services/auth-aware/admin-only/Vacations"
 
 
 export default function Vacations() {

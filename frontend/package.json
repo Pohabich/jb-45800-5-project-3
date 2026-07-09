@@ -16,6 +16,7 @@
     "@tab761/role-enums": "^1.0.0",
     "@types/react-paginate": "^7.1.4",
     "axios": "^1.16.1",
+    "chart.js": "2.9.4",
     "jwt-decode": "^4.0.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/chart.js": "2.9.36",
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
