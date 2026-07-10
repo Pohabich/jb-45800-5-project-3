@@ -106,7 +106,7 @@ CREATE TABLE `vacations` (
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   `price` int NOT NULL,
-  `image_url` varchar(255) NOT NULL,
+  `image_url` varchar(255) NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

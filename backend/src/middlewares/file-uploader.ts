@@ -25,10 +25,6 @@ export default async function fileUploader(request: Request, response: Response,
     const bucketKey: string = request.originalUrl.replace(new RegExp('^/[^/]+/[^/]+/([^/?]+).*$'), "$1");
     const image = request.files.imageUrl as UploadedFile
 
-    console.log(request.originalUrl)
-    console.log(bucketKey)
-    console.log('---bk---')
-
     const upload = new Upload({
         client: s3Client,
         params: {

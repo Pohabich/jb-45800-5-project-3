@@ -10,8 +10,12 @@ export default class VacationsService extends AuthAwareService {
     }
 
     async getVacationById(vacationId: string): Promise<Vacation> {
-        const { data } = await this.axiosInstance.get(`/api/admin/vacation/${vacationId}`)
-        return data
+        const { data: { imageUrl, ...rest } } = await this.axiosInstance.get(`/api/admin/vacation/${vacationId}`)
+
+        return {
+            ...rest,
+            image: imageUrl
+        }
     }
 
     async createVacation(vacationData: Partial<VacationDraft>): Promise<void> {
@@ -22,12 +26,13 @@ export default class VacationsService extends AuthAwareService {
         })
     }
 
-    async updateVacation(vacationId: string, vacationData: Partial<VacationDraft>): Promise<void> {
-        await this.axiosInstance.patch(`/api/admin/vacation/${vacationId}`, vacationData, {
+    async updateVacation(vacationId: string, vacationData: Partial<VacationDraft>): Promise<Vacation> {
+        const { data } = await this.axiosInstance.patch<Vacation>(`/api/admin/vacation/${vacationId}`, vacationData, {
             headers: {
                 ...(vacationData.imageUrl ? { 'Content-Type': 'multipart/form-data' } : {})
             }
         })
+        return data
     }
 
     async deleteVacation(vacationId: string): Promise<void> {

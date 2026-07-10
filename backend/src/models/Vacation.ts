@@ -30,7 +30,7 @@ export default class Vacation extends Model {
     @Column(DataType.INTEGER)
     price: number
 
-    @AllowNull(false)
+    @AllowNull(true)
     @Column(DataType.STRING)
     imageUrl: string
 
