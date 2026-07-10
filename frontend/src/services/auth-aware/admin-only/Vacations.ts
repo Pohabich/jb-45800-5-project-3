@@ -9,8 +9,12 @@ export default class VacationsService extends AuthAwareService {
         return data
     }
 
+    async getVacationById(vacationId: string): Promise<Vacation> {
+        const { data } = await this.axiosInstance.get(`/api/admin/vacation/${vacationId}`)
+        return data
+    }
+
     async createVacation(vacationData: Partial<VacationDraft>): Promise<void> {
-        console.log(vacationData)
         await this.axiosInstance.post(`/api/admin/vacation`, vacationData, {
             headers: {
                 'Content-Type': 'multipart/form-data'

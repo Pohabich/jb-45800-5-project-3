@@ -30,7 +30,7 @@ export default function Vacations() {
     }
 
     useEffect(() => {
-        const fetchVacations = async () => {
+        (async () => {
             try {
                 setLoading(true)
                 const data = await vacationsService.getAllVacations()
@@ -41,9 +41,7 @@ export default function Vacations() {
             } finally {
                 setLoading(false)
             }
-        }
-
-        fetchVacations()
+        })()
     }, [])
 
     return (

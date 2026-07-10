@@ -25,7 +25,7 @@ export default function NewVacation() {
     }, [startDateValue, endDateValue, setValue])
     ///
 
-    async function addVaction(draft: VacationDraft) {
+    async function addVacation(draft: VacationDraft) {
         try {
             const selectedImage = (draft.imageUrl as unknown as FileList)?.[0]
 
@@ -49,7 +49,7 @@ export default function NewVacation() {
 
     return (
         <div className="NewVacation">
-            <form onSubmit={handleSubmit(addVaction)}>
+            <form onSubmit={handleSubmit(addVacation)}>
                 <h3 className='title'>Add vacation</h3>
                 <label htmlFor="location">destination</label>
                 <input type="text"  {...register('location', {
