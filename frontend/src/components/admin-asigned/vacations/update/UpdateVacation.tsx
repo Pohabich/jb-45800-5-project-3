@@ -1,9 +1,10 @@
+import '../new/NewVacation.css'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import useService from '../../../../hooks/use-service'
 import type Vacation from '../../../../models/Vacation'
 import VacationsService from '../../../../services/auth-aware/user-only/Vacations'
-import './UpdateVacation.css'
+import type VacationDraft from '../../../../models/VacationDraft'
 
 
 export default function UpdateVacation() {

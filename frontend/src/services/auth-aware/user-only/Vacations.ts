@@ -1,4 +1,4 @@
-import type VacationResponse from "../../../models/VacationResponse"
+import type VacationResponse from "../../../models/VacationsResponse"
 import AuthAwareService from "../AuthAware"
 
 

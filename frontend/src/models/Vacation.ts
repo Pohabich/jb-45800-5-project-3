@@ -1,11 +1,6 @@
-export default interface Vacation {
-    vacationId: string
-    location: string
-    description: string
+import type VacationBase from "./VacationBase"
+
+
+export default interface Vacation extends VacationBase {
     image: string
-    startDate: string
-    endDate: string
-    price: number
-    totalLikes: number
-    isLiked: boolean
 }

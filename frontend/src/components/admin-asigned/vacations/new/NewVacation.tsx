@@ -1,17 +1,17 @@
+import './NewVacation.css'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import type Vacation from '../../../../models/Vacation'
-import './NewVacation.css'
 import { useEffect, useState, type ChangeEvent } from 'react'
 import useService from '../../../../hooks/use-service'
 import { showErrorToast } from '../../../common/show-error-toast'
 import VacationsService from '../../../../services/auth-aware/admin-only/Vacations'
+import type VacationDraft from '../../../../models/VacationDraft'
 
 
 export default function NewVacation() {
     const [now] = useState(new Date().toISOString().split('T')[0])
     const [previewImage, setPreviewImage] = useState<string>('')
-    const { register, handleSubmit, watch, setValue, formState } = useForm<Vacation>()
+    const { register, handleSubmit, watch, setValue, formState } = useForm<VacationDraft>()
     const navigate = useNavigate()
     const vacationsService = useService(VacationsService)
 
@@ -25,15 +25,13 @@ export default function NewVacation() {
     }, [startDateValue, endDateValue, setValue])
     ///
 
-    async function addVaction(draft: Vacation) {
+    async function addVaction(draft: VacationDraft) {
         try {
-            // const previewImage = (draft.image as unknown as FileList)?.[0]
-            // if (!previewImage) {
-            //     showErrorToast('Missing image')
-            //     return
-            // }
+            const selectedImage = (draft.imageUrl as unknown as FileList)?.[0]
 
+            draft.imageUrl = selectedImage
             await vacationsService.createVacation(draft)
+            goBack()
         } catch (error) {
             console.log(error)
             showErrorToast('Failed to create new vacation')
@@ -43,6 +41,10 @@ export default function NewVacation() {
     function imageChanged(event: ChangeEvent<HTMLInputElement, HTMLInputElement>): void {
         const file = event.currentTarget.files && event.currentTarget.files[0]
         setPreviewImage(URL.createObjectURL(file!))
+    }
+
+    function goBack() {
+        navigate('/vacations')
     }
 
     return (
@@ -101,19 +103,19 @@ export default function NewVacation() {
                 <label htmlFor="image">cover image</label>
                 {previewImage &&
                     <img src={previewImage} />}
-                <input type="file" accept="image/jpeg, image/png" {...register('image', {
+                <input type="file" accept="image/jpeg, image/png" {...register('imageUrl', {
                     required: {
                         value: true,
                         message: 'Image is required'
                     }
                 })} onChange={imageChanged} />
-                <div className='error'>{formState.errors.image?.message}</div>
+                <div className='error'>{formState.errors.imageUrl?.message}</div>
 
                 {formState.isSubmitting ? (
                     <div className="loader">Loading data...</div>
                 ) : (<>
                     <button type='submit' className='btnSubmit'>Add</button>
-                    <button className='btnCancel' onClick={() => navigate(-1)}>Cancel</button>
+                    <button className='btnCancel' onClick={() => goBack()}>Cancel</button>
                 </>
                 )}
             </form>

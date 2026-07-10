@@ -1,11 +1,10 @@
 import { useEffect, useRef } from "react"
 import { Chart } from 'chart.js'
-import './Chart.css'
+import './ChartComponent.css'
 import type DestinationLikes from "../../../models/DestinationLikes"
 
 
 const BAR_COLOR = '#3da5ed'
-
 
 interface Props {
     data: DestinationLikes[],
