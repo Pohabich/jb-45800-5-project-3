@@ -1,4 +1,9 @@
-# replace all container names accroding to actual project
+# this file will essentially describe all the "docker run" commands that
+# are required in order to launch a system that is combined of 
+# several images to the air
+
+# each service ends up as a docker container
+# that is, each service translates to a docker run command
 services:
   database:
     container_name: project3-db-compose 
@@ -8,8 +13,6 @@ services:
       - MYSQL_TCP_PORT=3306
     expose:
       - 3306
-    ports:
-      - 3306:3306
     build: ./database
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1"]
@@ -17,11 +20,29 @@ services:
       timeout: 30s
       retries: 5
       start_period: 30s
-      
+
+  localstack:
+    container_name: localstack-compose
+    ports:
+      - 4566:4566
+      - 4510-4559:4510-4559
+    image: localstack/localstack:4.4.0
+
+  mcp:
+    container_name: project3-mcp-compose
+    ports:
+      - 3005:3005
+    build: ./mcp
+    depends_on:
+      - backend
+
   backend:
     container_name: project3-backend-compose
     ports:
-      - 3010:3000
+      - 3000:3000
+    environment:
+      - PROJECT3_AI_API_KEY=${PROJECT3_AI_API_KEY}
+      - PROJECT3_MCP_API_KEY=${PROJECT3_MCP_API_KEY}
     build:
       context: ./backend
       dockerfile: Dockerfile.compose
@@ -32,7 +53,6 @@ services:
   frontend:
     container_name: project3-front-compose
     ports:
-      - 6124:80
+      - 6123:80
     build: 
       context: ./frontend
-      dockerfile: Dockerfile.compose
