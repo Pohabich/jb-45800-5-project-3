@@ -1,16 +1,20 @@
 .Header {
-  display: flex;
+  /* display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 24px;
+  justify-content: space-between; */
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  background: #bde4ff;
+  padding-bottom: 12px;
 }
+
 .Header .greeting {
+  grid-row: 1;
+  text-align: right;
   color: #536471;
-  padding-top: 0px;
-  padding-bottom: 6px;
-  margin-right: 12px;
+  margin: 6px 12px;
   font-size: 0.75rem;
   font-weight: 600;
 }
@@ -23,6 +27,10 @@
   border-radius: 4px;
 }
 
+.Header .menu {
+  grid-row: 2;
+}
+
 .Header a {
   text-decoration: none;
   color: #536471;
@@ -30,7 +38,6 @@
   font-size: 1.5rem;
   padding: 6px 12px;
   border-radius: 20px;
-  transition: background-color 0.2s;
 }
 
 .Header a:hover {

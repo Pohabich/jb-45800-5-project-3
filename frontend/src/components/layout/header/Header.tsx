@@ -18,9 +18,10 @@ export default function Header() {
 
     return (
         <div className="Header">
-            <div>
+            <div className="greeting">
+                Welcome, <b><i>{name}</i></b> <Link to="/login" onClick={logMeOut} className="logout-link">Logout</Link>
             </div>
-            <div>
+            <div className="menu">
                 {role === Roles.USER && (
                     <>
                         <NavLink to="/vacations">Vacations</NavLink>
@@ -35,9 +36,6 @@ export default function Header() {
                         <NavLink to="/reports">Reports</NavLink>
                     </>
                 )}
-            </div>
-            <div className="greeting">
-                Welcome, <b><i>{name}</i></b> <Link to="/login" onClick={logMeOut} className="logout-link">Logout</Link>
             </div>
         </div>
     )

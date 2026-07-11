@@ -34,7 +34,7 @@ export default function UpdateVacation() {
         try {
             const selectedImage = (draft.imageUrl as unknown as FileList)?.[0]
             if (selectedImage) draft.imageUrl = selectedImage
-console.log(selectedImage)
+
             await vacationsService.updateVacation(id!, draft)
             goBack()
         } catch (error) {
