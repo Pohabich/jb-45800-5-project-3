@@ -35,19 +35,15 @@ export default function Mcp() {
         <div className="Mcp">
             <div className="mcp-form">
                 <h3>Ask me anything about our vacations</h3>
-                <textarea rows="4" cols="50" placeholder="Type your question here..." onChange={(e) => setQuestion(e.currentTarget.value.trim())}></textarea>
+                <textarea rows={4} cols={50} placeholder="Type your question here..." onChange={(e) => setQuestion(e.currentTarget.value.trim())}></textarea>
                 <button className="mcp-button" onClick={askQuestion}>Ask</button>
             </div>
             <br />
 
             {loading ? (
-                <div className="loader">Loading data...</div>
-            ) :
-                !mspAnswer ? (
-                    <div className="mcp-answer">{mspAnswer}</div>
-                ) : (
-                    <div></div>
-                )}
+                <div className="loader">Loading data...</div>)
+                : mspAnswer && <div className="mcp-answer">{mspAnswer}</div>
+            }
         </div>
     )
 }
