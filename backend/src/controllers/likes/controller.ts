@@ -47,13 +47,6 @@ export async function unLike(request: Request<{}, {}, { vacationId: string }>, r
 ////////////////////
 // ADMIN only !!! //
 ////////////////////
-/**
- * 
- * @param request 
- * @param response 
- * @param next 
- * @returns array of object {vacationId, likes}
- */
 export async function getLikesCount(request: Request, response: Response, next: NextFunction) {
     try {
         const likes = await Vacation.findAll({

@@ -38,7 +38,7 @@ export default function Reports() {
     }
 
     useEffect(() => {
-        const fetchLikes = async () => {
+        (async () => {
             try {
                 setLoading(true)
                 const data = await likesService.getVacationsLikes()
@@ -49,9 +49,7 @@ export default function Reports() {
             } finally {
                 setLoading(false)
             }
-        }
-
-        fetchLikes()
+        })()
     }, [])
 
     return (
@@ -62,8 +60,8 @@ export default function Reports() {
                 <div className="empty-state">No distinations found</div>
             ) : (
                 <div>
-                    <div className="chart-container">
-                        <ChartComponent data={locationsLikes} title='Distination popularity' />
+                    <div className="chart-container">Distination popularity
+                        <ChartComponent data={locationsLikes} />
                     </div>
                     <br />
                     <button onClick={handleExport}>Export to CSV</button>

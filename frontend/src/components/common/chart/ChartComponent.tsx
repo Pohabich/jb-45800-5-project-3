@@ -8,22 +8,21 @@ const BAR_COLOR = '#3da5ed'
 
 interface Props {
     data: DestinationLikes[],
-    title: string
 }
 
-export default function ChartComponent({ data, title }: Props) {
+export default function ChartComponent({ data }: Props) {
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const chartRef = useRef<Chart | null>(null)
 
     useEffect(() => {
         if (!canvasRef.current) return
 
-        const styles = getComputedStyle(document.documentElement)
-        const fontFamily = styles.getPropertyValue('--font-family')
-        const fontSize = parseInt(styles.getPropertyValue('--font-size'))
+        // const styles = getComputedStyle(document.documentElement)
+        // const fontFamily = styles.getPropertyValue('--font-family')
+        // const fontSize = parseInt(styles.getPropertyValue('--font-size'))
 
-        Chart.defaults.global.defaultFontFamily = fontFamily
-        Chart.defaults.global.defaultFontSize = fontSize
+        // Chart.defaults.global.defaultFontFamily = fontFamily
+        // Chart.defaults.global.defaultFontSize = fontSize
 
         chartRef.current = new Chart(canvasRef.current, {
             type: 'bar',
@@ -34,6 +33,11 @@ export default function ChartComponent({ data, title }: Props) {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        bottom: 30
+                    }
+                },
                 animation: {
                     duration: 0,
                 },
@@ -41,8 +45,7 @@ export default function ChartComponent({ data, title }: Props) {
                     display: false,
                 },
                 title: {
-                    display: true,
-                    text: title,
+                    display: false,
                 },
                 scales: {
                     xAxes: [{
@@ -52,7 +55,10 @@ export default function ChartComponent({ data, title }: Props) {
                         }
                     }],
                     yAxes: [{
-                        ticks: { beginAtZero: true },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1
+                        },
                         gridLines: {
                             display: true,
                             drawOnChartArea: true
