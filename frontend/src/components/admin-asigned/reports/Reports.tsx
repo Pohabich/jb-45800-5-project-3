@@ -61,11 +61,13 @@ export default function Reports() {
             ) : locationsLikes.length === 0 ? (
                 <div className="empty-state">No distinations found</div>
             ) : (
-                <>
-                    <ChartComponent data={locationsLikes} title='Distination popularity' />
+                <div>
+                    <div className="chart-container">
+                        <ChartComponent data={locationsLikes} title='Distination popularity' />
+                    </div>
                     <br />
                     <button onClick={handleExport}>Export to CSV</button>
-                </>)
+                </div>)
             }
         </div>
     )

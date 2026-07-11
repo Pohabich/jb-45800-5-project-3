@@ -1,0 +1,30 @@
+.Reports {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+}
+
+.Reports button {
+    padding: 8px 16px;
+    cursor: pointer;
+    background-color: #1e88e5;
+    color: #ffffff;
+    border: none;
+
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.chart-container{
+    width: '600px';
+    height: '400px';
+    position: relative; 
+
+    border: 6px solid #e2e8f0;
+    border-radius: 12px;
+    background-color: #ffffff;
+    /* display: block; */
+    overflow: hidden;
+    margin: 12px;
+}

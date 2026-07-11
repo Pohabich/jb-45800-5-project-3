@@ -32,6 +32,8 @@ export default function ChartComponent({ data, title }: Props) {
                 datasets: [],
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
                 animation: {
                     duration: 0,
                 },
